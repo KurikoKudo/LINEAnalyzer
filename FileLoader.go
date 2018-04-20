@@ -18,7 +18,7 @@ func FileLoader(fp *os.File) (LineAllTalk, err) {
 	} else {
 		fp, err = os.Open(os.Args[1])
 		if err != nil {
-			return nil, err
+			return lineAllTalk, err
 		}
 		defer fp.Close()
 	}
@@ -32,14 +32,12 @@ func FileLoader(fp *os.File) (LineAllTalk, err) {
 	str := buf[5:20]
 	lineAllTalk.SaveDate,_ = time.Parse(saveDateFmt,str)
 	_ = scanner.Text()
-	line := strings.Split(scanner.Text(), "")
-	str = ""
-	for i, v := range line {
-		if i > 9 {
-			break
-		}
-		str += v
-	}
+
+	buf = scanner.Text()
+	date := buf[0:9]
+
+	fmt.Println("first date",date)
+
 
 	for scanner.Scan() {
 
@@ -54,7 +52,7 @@ func FileLoader(fp *os.File) (LineAllTalk, err) {
 				lineAllTalk.Massagaes = append(lineAllTalk.Massagaes, massage)
 			} else if str[4] == "/"{
 				// 日付
-				date := buf[0:9]
+				date = buf[0:9]
 
 			} else {
 				// 二行以上のメッセージ
@@ -66,6 +64,10 @@ func FileLoader(fp *os.File) (LineAllTalk, err) {
 	}
 	if err := scanner.Err(); err != nil {
 		return lineAllTalk, err
+	}
+
+	for _,v := range lineAllTalk.Massagaes {
+		fmt.Println(v)
 	}
 
 	return lineAllTalk, err
