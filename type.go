@@ -5,10 +5,10 @@ import "time"
 type LineAllTalk struct {
 	Title string
 	SaveDate time.Time
-	Massagaes []Massagae
+	Massages []Massage
 }
 
-type Massagae struct {
+type Massage struct {
 	SendTime time.Time
 	Sender string
 	Comment string
