@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+//MassageFormatter は読み込まれたメッセージをフォーマットする関数
 func MassageFormatter (buf string,date string) Massage {
 
 	var massage Massage

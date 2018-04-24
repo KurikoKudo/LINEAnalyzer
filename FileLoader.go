@@ -9,6 +9,7 @@ import (
 	"log"
 )
 
+//FileLoader はファイルを読み込む関数
 func FileLoader(path string) (LineAllTalk, error) {
 
 	var err error
